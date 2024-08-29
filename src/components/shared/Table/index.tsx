@@ -1,16 +1,27 @@
+import Card from "src/components/ui/Card";
 import styles from "./table.module.scss";
-
-import card from "src/assets/cards/ace/3_ace.svg";
+import { useGame } from "src/contexts/GameContext";
+import { useDroppable } from "@dnd-kit/core";
 
 const Table = () => {
+   const { slots } = useGame();
+
+   const { isOver, setNodeRef } = useDroppable({
+      id: "gametable",
+   });
+
    return (
-      <div className={`${styles.wrapper} ${styles.drop}`}>
-         <img src={card} />
-         <img src={card} />
-         <img src={card} />
-         <img src={card} />
-         <img src={card} />
-         <img src={card} />
+      <div
+         className={`${styles.wrapper} ${isOver ? styles.drop : ""}`}
+         ref={setNodeRef}
+      >
+         {slots.map((slot) => (
+            <div className={styles.slot} key={slot.id}>
+               {slot.cards.map((card, index) => (
+                  <Card key={index} {...card} randomRotate />
+               ))}
+            </div>
+         ))}
       </div>
    );
 };

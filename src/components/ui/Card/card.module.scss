@@ -1,43 +1,15 @@
 .card {
-   width: 200px;
-   height: 288px;
+   filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.05));
+   cursor: grab;
 
-   display: flex;
-   justify-content: center;
-   align-items: center;
+   transition: filter 0.3s ease, scale 0.2s ease;
 
-   background: #fff;
-   border-radius: 10px;
+   &:active {
+      cursor: grabbing;
+   }
 
-   .corner {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-
-      p {
-         margin: 0;
-         color: black;
-         font-size: 28px;
-         line-height: 1;
-      }
-
-      svg {
-         width: 18px;
-         height: 20px;
-      }
-
-      &.bottomRight {
-         top: initial;
-         left: initial;
-         right: 15px;
-         bottom: 15px;
-
-         rotate: 180deg;
-      }
+   &.drag {
+      filter: drop-shadow(0px 5px 50px rgba(0, 0, 0, 0.4));
+      scale: 1.15;
    }
 }

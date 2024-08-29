@@ -1,16 +1,14 @@
-import { Card as CardType } from "src/types";
 import styles from "./playercards.module.scss";
+import { useGame } from "src/contexts/GameContext";
 import Card from "src/components/ui/Card";
 
-interface PlayerCardsProps {
-   cards: CardType[];
-}
+const PlayerCards = () => {
+   const { hand } = useGame();
 
-const PlayerCards = ({ cards }: PlayerCardsProps) => {
    return (
       <div className={styles.root}>
-         {cards.map((card) => (
-            <Card {...card} />
+         {hand.map((card) => (
+            <Card draggable {...card} key={card.id} />
          ))}
       </div>
    );
