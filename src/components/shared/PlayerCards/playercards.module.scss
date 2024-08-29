@@ -9,11 +9,12 @@
 
    > * {
       position: relative;
-      bottom: -100px;
+      bottom: -80px;
+      width: 160px;
 
       &:not(:first-child) {
          filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.5));
-         margin-left: -70px;
+         margin-left: var(--gap);
       }
    }
 }

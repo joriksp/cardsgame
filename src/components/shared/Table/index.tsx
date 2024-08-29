@@ -17,8 +17,8 @@ const Table = () => {
       >
          {slots.map((slot) => (
             <div className={styles.slot} key={slot.id}>
-               {slot.cards.map((card, index) => (
-                  <Card key={index} {...card} randomRotate />
+               {slot.cards.map((card) => (
+                  <Card key={card.id} {...card} randomRotate />
                ))}
             </div>
          ))}

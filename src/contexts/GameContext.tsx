@@ -33,8 +33,11 @@ const initialValue = {
    hand: [
       { suit: Suits.Club, rank: Ranks.Ace, id: 1 },
       { suit: Suits.Diamond, rank: Ranks.Jack, id: 2 },
-      { suit: Suits.Spade, rank: Ranks.Three, id: 3 },
-      { suit: Suits.Heart, rank: Ranks.Queen, id: 4 },
+      { suit: Suits.Spade, rank: Ranks.Four, id: 3 },
+      { suit: Suits.Diamond, rank: Ranks.Jack, id: 4 },
+      { suit: Suits.Diamond, rank: Ranks.Jack, id: 5 },
+      { suit: Suits.Diamond, rank: Ranks.Jack, id: 6 },
+      { suit: Suits.Diamond, rank: Ranks.Jack, id: 7 },
    ],
    clearTable: () => {},
    addCardToHand: () => {},

@@ -1,6 +1,7 @@
 .card {
    filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.05));
    cursor: grab;
+   touch-action: none;
 
    transition: filter 0.3s ease, scale 0.2s ease;
 

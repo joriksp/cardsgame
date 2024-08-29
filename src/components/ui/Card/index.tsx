@@ -16,7 +16,6 @@ const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
    useEffect(() => {
       import(`../../../../src/assets/cards/${suit}/${rank}.svg`).then(
          (object) => {
-            console.log(object.default);
             setSrc(object.default);
          }
       );
@@ -34,7 +33,7 @@ const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
 
    useEffect(() => {
       if (randomRotate) {
-         setRotate(Math.floor(Math.random() * 5) - 2.5);
+         setRotate(Math.floor(Math.random() * 6) - 3);
       }
    }, [randomRotate]);
 

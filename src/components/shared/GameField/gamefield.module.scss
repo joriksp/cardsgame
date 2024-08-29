@@ -1,14 +1,11 @@
 .field {
    flex: 1 1 auto;
-   padding: 20px;
-   padding-top: 40px;
    position: relative;
 
    display: flex;
    justify-content: flex-start;
    align-items: center;
    flex-direction: column;
-   gap: 30px;
 
    background: url("src/assets/cards/background.png");
    background-size: 10px;
@@ -19,5 +16,7 @@
    width: 100%;
    display: flex;
    justify-content: space-around;
-   gap: 15px;
+   gap: 10px;
+
+   padding: 40px 15px;
 }
