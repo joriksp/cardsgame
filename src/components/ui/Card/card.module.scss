@@ -1,0 +1,43 @@
+.card {
+   width: 200px;
+   height: 288px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background: #fff;
+   border-radius: 10px;
+
+   .corner {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+
+      p {
+         margin: 0;
+         color: black;
+         font-size: 28px;
+         line-height: 1;
+      }
+
+      svg {
+         width: 18px;
+         height: 20px;
+      }
+
+      &.bottomRight {
+         top: initial;
+         left: initial;
+         right: 15px;
+         bottom: 15px;
+
+         rotate: 180deg;
+      }
+   }
+}
