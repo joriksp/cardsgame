@@ -11,6 +11,16 @@ interface CardProps extends CardI {
 
 const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
    const [rotate, setRotate] = useState(0);
+   const [src, setSrc] = useState("");
+
+   useEffect(() => {
+      import(`../../../../src/assets/cards/${suit}/${rank}.svg`).then(
+         (object) => {
+            console.log(object.default);
+            setSrc(object.default);
+         }
+      );
+   }, [rank, suit]);
 
    const { attributes, listeners, setNodeRef, transform, isDragging } =
       useDraggable({
@@ -37,9 +47,9 @@ const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
          style={{
             transform: `rotate(${rotate}deg) ${style}`,
          }}
-         src={`src/assets/cards/${suit}/${rank}.svg`}
+         src={src}
       />
    );
 };
 
-export default memo(Card);
+export default Card;
