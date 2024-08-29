@@ -52,4 +52,4 @@ const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
    );
 };
 
-export default Card;
+export default memo(Card);
