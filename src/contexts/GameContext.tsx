@@ -3,7 +3,6 @@ import {
    ReactNode,
    useContext,
    createContext,
-   memo,
    useCallback,
 } from "react";
 import { CardI, Ranks, Suits } from "src/types";

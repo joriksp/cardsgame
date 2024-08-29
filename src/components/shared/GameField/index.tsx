@@ -1,4 +1,3 @@
-import { Ranks, Suits } from "src/types";
 import Player from "../../ui/Player";
 import PlayerCards from "../PlayerCards";
 import Table from "../Table";
@@ -15,14 +14,7 @@ const GameField = () => {
 
          <Table />
 
-         <PlayerCards
-            cards={[
-               {
-                  suit: Suits.Club,
-                  rank: Ranks.Five,
-               },
-            ]}
-         />
+         <PlayerCards />
       </div>
    );
 };
