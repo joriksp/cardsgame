@@ -1,6 +1,5 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import GameField from "./components/shared/GameField";
-import Header from "./components/shared/Header";
 import Navbar from "./components/shared/Navbar";
 import { useGame } from "./contexts/GameContext";
 import { CardI } from "./types";
@@ -11,7 +10,7 @@ function App() {
       const data = event.active.data;
 
       if (event.over?.id === "gametable" && data.current) {
-         addCardToSlot(data.current as CardI, 0);
+         addCardToSlot(data.current as CardI, 4);
          removeCardFromHand(data.current?.id as number);
       }
    };
@@ -19,7 +18,6 @@ function App() {
    return (
       <DndContext onDragEnd={handleDragEnd}>
          <div className="root">
-            <Header title="Top NavBar" />
             <GameField />
             <Navbar />
          </div>
