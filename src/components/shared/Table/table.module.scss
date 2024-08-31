@@ -1,7 +1,7 @@
 .wrapper {
    position: relative;
    z-index: 1;
-   padding: 25px;
+   padding: 30px 25px;
 
    display: grid;
    grid-template-columns: repeat(3, 1fr);
@@ -14,7 +14,7 @@
    /* On drop */
 
    &.drop {
-      border: 2px dashed rgba(255, 255, 255, 0.8);
+      border: 2px dashed rgba(255, 255, 255, 0.6);
       border-radius: 8px;
    }
 
@@ -30,6 +30,11 @@
       position: relative;
       display: flex;
       justify-content: center;
+
+      &.drop {
+         border: 2px dashed rgba(255, 255, 255, 0.3);
+         border-radius: 8px;
+      }
 
       > * {
          width: 75px;

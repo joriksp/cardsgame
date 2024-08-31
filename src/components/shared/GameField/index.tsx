@@ -17,7 +17,6 @@ const GameField = () => {
          <Table />
          <Deck
             trumpCard={{
-               id: 1,
                suit: Suits.Club,
                rank: Ranks.Eight,
             }}

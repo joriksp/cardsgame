@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { createElement, CSSProperties, RefObject } from "react";
 import back_ic from "src/assets/cards/backs/red.svg";
 
 export const varibleGap = (
@@ -57,15 +57,25 @@ export const moveCardFromDeck = (
    const endX = targetRect.x + targetRect.width / 2 - targetWidth / 2;
    const endY = targetRect.y + targetRect.height / 2 - targetHeight / 2;
 
-   console.log(`start x: ${startX} y: ${startY}`);
-   console.log(`end x: ${endX} y: ${endY}`);
+   // console.log(`start x: ${startX} y: ${startY}`);
+   // console.log(`end x: ${endX} y: ${endY}`);
 
-   const cardElement = document.createElement("img");
-   cardElement.style.position = "absolute";
-   cardElement.style.width = `${cardWidth}px`;
-   cardElement.style.height = `${cardHeight}px`;
-   cardElement.style.transition = `opacity .3s ease-out`;
-   cardElement.src = back_ic;
+   const cardElement = element("img", {
+      style: {
+         position: "absolute",
+         width: `${cardWidth}px`,
+         height: `${cardHeight}px`,
+         transition: `opacity .3s ease-out`,
+      },
+      src: back_ic,
+   });
+
+   // const cardElement = document.createElement("img");
+   // cardElement.style.position = "absolute";
+   // cardElement.style.width = `${cardWidth}px`;
+   // cardElement.style.height = `${cardHeight}px`;
+   // cardElement.style.transition = `opacity .3s ease-out`;
+   // cardElement.src = back_ic;
    document.body.appendChild(cardElement);
 
    let startTime = 0;
@@ -125,4 +135,23 @@ export const clearTableAnimated = (
       }, 500);
    });
    cardRefs.current = {};
+};
+
+export const element = (
+   type: string,
+   props?: {
+      style?: CSSProperties;
+      src?: string;
+   }
+) => {
+   const element = document.createElement(type);
+
+   if (props) {
+      Object.assign(element.style, props.style);
+      if (element instanceof HTMLImageElement && props.src) {
+         element.src = props.src;
+      }
+   }
+
+   return element;
 };

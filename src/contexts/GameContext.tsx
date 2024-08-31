@@ -4,6 +4,7 @@ import {
    useContext,
    createContext,
    useCallback,
+   useEffect,
 } from "react";
 import { CardI, Ranks, Suits } from "src/types";
 
@@ -30,23 +31,13 @@ const initialValue = {
       { id: 4, cards: [] },
       { id: 5, cards: [] },
    ],
-   hand: [
-      { suit: Suits.Club, rank: Ranks.Ace, id: 1 },
-      { suit: Suits.Diamond, rank: Ranks.Jack, id: 2 },
-      { suit: Suits.Spade, rank: Ranks.Four, id: 3 },
-      { suit: Suits.Diamond, rank: Ranks.Jack, id: 4 },
-      { suit: Suits.Diamond, rank: Ranks.Jack, id: 5 },
-      { suit: Suits.Diamond, rank: Ranks.Jack, id: 6 },
-      { suit: Suits.Diamond, rank: Ranks.Jack, id: 7 },
-      {
-         suit: Suits.Heart,
-         rank: Ranks.Eight,
-         id: 8,
-      },
-      { suit: Suits.Club, rank: Ranks.King, id: 9 },
-      { suit: Suits.Spade, rank: Ranks.Three, id: 10 },
-      { suit: Suits.Diamond, rank: Ranks.Queen, id: 11 },
-   ],
+   hand: Array(20)
+      .fill(null)
+      .map((_, index) => ({
+         suit: Object.values(Suits)[Math.floor(Math.random() * 4)],
+         rank: Object.values(Ranks)[Math.floor(Math.random() * 13)],
+         id: index + 1,
+      })),
    clearTable: () => {},
    addCardToHand: () => {},
    addCardToSlot: () => {},
@@ -72,6 +63,9 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       },
       [setSlots]
    );
+
+   const a = useEffect(() => {});
+   console.table(a);
 
    const addCardToHand = useCallback(
       (card: CardI) => {

@@ -1,16 +1,30 @@
 import { forwardRef, memo, useEffect, useState } from "react";
 import { CardI } from "src/types";
 import styles from "./card.module.scss";
+import { useDraggable } from "@dnd-kit/core";
 
 interface CardProps extends CardI {
    randomRotate?: boolean;
+   draggable?: boolean;
    className?: string;
 }
 
-const Card = forwardRef(
-   ({ suit, rank, randomRotate, className = "" }: CardProps, ref) => {
+const DraggableCard = forwardRef(
+   (
+      {
+         suit,
+         rank,
+         randomRotate,
+         draggable = true,
+         id,
+         className = "",
+      }: CardProps,
+      ref
+   ) => {
       const [rotate, setRotate] = useState(0);
       const [src, setSrc] = useState("");
+
+      if (!id) id = Math.floor(Math.random() * 360);
 
       useEffect(() => {
          const loadCardImage = async () => {
@@ -22,6 +36,13 @@ const Card = forwardRef(
          loadCardImage();
       }, [rank, suit]);
 
+      const { attributes, listeners, setNodeRef, transform, isDragging } =
+         useDraggable({
+            id,
+            data: { suit, rank, id },
+            disabled: !draggable,
+         });
+
       useEffect(() => {
          if (randomRotate) {
             const randomDeg = Math.floor(Math.random() * 12) - 6;
@@ -32,18 +53,26 @@ const Card = forwardRef(
       return (
          <img
             ref={(node) => {
+               setNodeRef(node);
                if (ref) {
                   typeof ref === "function" ? ref(node) : (ref.current = node);
                }
             }}
+            {...listeners}
+            {...attributes}
+            className={`${styles.card} ${isDragging && styles.dragging} ${
+               draggable && styles.draggable
+            } ${className}`}
             style={{
+               transform: transform
+                  ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+                  : undefined,
                rotate: `${rotate}deg`,
             }}
-            className={`${styles.card} ${className}`}
             src={src}
          />
       );
    }
 );
 
-export default memo(Card);
+export default memo(DraggableCard);

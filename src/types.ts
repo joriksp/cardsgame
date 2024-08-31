@@ -24,5 +24,5 @@ export enum Ranks {
 export interface CardI {
    suit: Suits;
    rank: Ranks;
-   id: number;
+   id?: number;
 }

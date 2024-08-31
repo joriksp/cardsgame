@@ -7,11 +7,28 @@ import { CardI } from "./types";
 function App() {
    const { addCardToSlot, removeCardFromHand } = useGame();
 
+   const onDroppedToDropZone = (droppedCard: CardI) => {
+      // random position as example
+      const random = Math.floor(Math.random() * 6);
+
+      addCardToSlot(droppedCard, random);
+   };
+
+   const onDroppedToTableSlot = (droppedCard: CardI, slotId: number) => {
+      addCardToSlot(droppedCard, slotId);
+   };
+
    const handleDragEnd = (event: DragEndEvent) => {
       const data = event.active.data;
 
       if (event.over?.id === "table" && data.current) {
-         addCardToSlot(data.current as CardI, Math.floor(Math.random() * 6));
+         onDroppedToDropZone(data.current as CardI);
+         removeCardFromHand(data.current?.id as number);
+      }
+
+      if (String(event.over?.id).startsWith("slot")) {
+         const id = String(event.over?.id).split("-")[1];
+         onDroppedToTableSlot(data.current as CardI, Number(id));
          removeCardFromHand(data.current?.id as number);
       }
    };

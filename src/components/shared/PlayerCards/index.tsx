@@ -1,6 +1,6 @@
 import styles from "./playercards.module.scss";
 import { useGame } from "src/contexts/GameContext";
-import Card from "src/components/ui/Card";
+import DraggableCard from "src/components/ui/Card/DraggableCard";
 import { CSSProperties } from "react";
 
 interface PlayerCardsProps {
@@ -34,7 +34,11 @@ const PlayerCards = ({ isDraggingEnabled = true }: PlayerCardsProps) => {
             }
          >
             {hand.map((card) => (
-               <Card draggable={isDraggingEnabled} {...card} key={card.id} />
+               <DraggableCard
+                  draggable={isDraggingEnabled}
+                  {...card}
+                  key={card.id}
+               />
             ))}
          </div>
       </div>

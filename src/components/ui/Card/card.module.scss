@@ -1,17 +1,19 @@
 .card {
    filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.05));
-   cursor: grab;
    touch-action: none;
    user-select: none;
 
-   transition: filter 0.3s ease, scale 0.2s ease;
+   &.draggable {
+      transition: filter 0.3s ease, scale 0.2s ease;
+      cursor: grab;
 
-   &:active {
-      cursor: grabbing;
+      &:active {
+         cursor: grabbing;
+      }
    }
 
-   &.drag {
+   &.dragging {
       filter: drop-shadow(0px 5px 50px rgba(0, 0, 0, 0.4));
-      scale: 1.15;
+      scale: 1.1;
    }
 }
