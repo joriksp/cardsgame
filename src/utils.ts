@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, RefObject } from "react";
+import { CSSProperties, RefObject } from "react";
 import back_ic from "src/assets/cards/backs/red.svg";
 
 export const varibleGap = (
