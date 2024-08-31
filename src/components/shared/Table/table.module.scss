@@ -25,13 +25,12 @@
 
    .slot {
       width: 100px;
+      position: relative;
+      display: flex;
 
       @media (max-width: 430px) {
          width: 85px;
       }
-
-      position: relative;
-      display: flex;
 
       > * {
          width: 100%;

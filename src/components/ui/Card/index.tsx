@@ -21,19 +21,21 @@ const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
       );
    }, [rank, suit]);
 
+   console.log(rotate);
+
    const { attributes, listeners, setNodeRef, transform, isDragging } =
       useDraggable({
          id: id,
          data: { suit, rank, id },
          disabled: !draggable,
       });
-   const style = transform
+   const transformStyle = transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : "";
 
    useEffect(() => {
       if (randomRotate) {
-         setRotate(Math.floor(Math.random() * 6) - 3);
+         setRotate(Math.floor(Math.random() * 12) - 6);
       }
    }, [randomRotate]);
 
@@ -44,7 +46,8 @@ const Card = ({ suit, rank, randomRotate, draggable, id }: CardProps) => {
          {...attributes}
          className={`${styles.card} ${isDragging ? styles.drag : ""}`}
          style={{
-            transform: `rotate(${rotate}deg) ${style}`,
+            transform: transformStyle,
+            rotate: `${rotate}deg`,
          }}
          src={src}
       />

@@ -11,7 +11,7 @@ function App() {
       const data = event.active.data;
 
       if (event.over?.id === "table" && data.current) {
-         addCardToSlot(data.current as CardI, 4);
+         addCardToSlot(data.current as CardI, Math.floor(Math.random() * 6));
          removeCardFromHand(data.current?.id as number);
       }
    };
