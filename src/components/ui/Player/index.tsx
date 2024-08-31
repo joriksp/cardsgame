@@ -29,7 +29,7 @@ const Player = ({ name, avatar, cardsCount }: PlayerProps) => {
       >
          <Avatar src={avatar} name={name} />
 
-         <div className={styles.cards}>
+         <div className={styles.cards} id={`cards-${name}`}>
             {Array.from({ length: cardsCount }).map((_, index) => (
                <img key={index} src={red_back} className={styles.card} />
             ))}

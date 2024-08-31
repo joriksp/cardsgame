@@ -1,5 +1,6 @@
 .cards_wrapper {
    position: absolute;
+   z-index: 20;
    left: 0;
    bottom: 0;
 
@@ -18,6 +19,7 @@
    padding: 0 60px;
 
    transition: transform 0.2s ease-out;
+
    @media (hover: hover) and (pointer: fine) {
       &:hover {
          transform: translateY(-40px) !important;

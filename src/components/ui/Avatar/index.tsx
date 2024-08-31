@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./avatar.module.scss";
 
 interface AvatarProps {
@@ -14,4 +15,4 @@ const Avatar = ({ src, name }: AvatarProps) => {
    );
 };
 
-export default Avatar;
+export default memo(Avatar);

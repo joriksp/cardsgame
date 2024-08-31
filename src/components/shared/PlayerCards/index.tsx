@@ -3,7 +3,11 @@ import { useGame } from "src/contexts/GameContext";
 import Card from "src/components/ui/Card";
 import { CSSProperties } from "react";
 
-const PlayerCards = () => {
+interface PlayerCardsProps {
+   isDraggingEnabled?: boolean;
+}
+
+const PlayerCards = ({ isDraggingEnabled = true }: PlayerCardsProps) => {
    const { hand } = useGame();
 
    let gap = 154;
@@ -22,6 +26,7 @@ const PlayerCards = () => {
       <div className={styles.cards_wrapper}>
          <div
             className={styles.root}
+            id="playercards"
             style={
                {
                   "--gap": -gap + "px",
@@ -29,7 +34,7 @@ const PlayerCards = () => {
             }
          >
             {hand.map((card) => (
-               <Card draggable {...card} key={card.id} />
+               <Card draggable={isDraggingEnabled} {...card} key={card.id} />
             ))}
          </div>
       </div>
