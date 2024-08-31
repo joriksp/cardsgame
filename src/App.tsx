@@ -6,10 +6,11 @@ import { CardI } from "./types";
 
 function App() {
    const { addCardToSlot, removeCardFromHand } = useGame();
+
    const handleDragEnd = (event: DragEndEvent) => {
       const data = event.active.data;
 
-      if (event.over?.id === "gametable" && data.current) {
+      if (event.over?.id === "table" && data.current) {
          addCardToSlot(data.current as CardI, 4);
          removeCardFromHand(data.current?.id as number);
       }

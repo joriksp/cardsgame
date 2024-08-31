@@ -4,16 +4,18 @@ import { useGame } from "src/contexts/GameContext";
 import { useDroppable } from "@dnd-kit/core";
 
 const Table = () => {
-   const { slots } = useGame();
+   const { slots, clearTable } = useGame();
+   const { isOver, setNodeRef } = useDroppable({ id: "table" });
 
-   const { isOver, setNodeRef } = useDroppable({
-      id: "gametable",
-   });
+   const handleClearTable = () => {
+      clearTable();
+   };
 
    return (
       <div
          className={`${styles.wrapper} ${isOver ? styles.drop : ""}`}
          ref={setNodeRef}
+         onClick={handleClearTable}
       >
          {slots.map((slot) => (
             <div className={styles.slot} key={slot.id}>

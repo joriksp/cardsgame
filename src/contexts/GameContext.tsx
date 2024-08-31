@@ -80,7 +80,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
    );
 
    const clearTable = useCallback(() => {
-      setSlots([]);
+      setSlots((prev) => prev.map((slot) => ({ ...slot, cards: [] })));
    }, [setSlots]);
 
    return (

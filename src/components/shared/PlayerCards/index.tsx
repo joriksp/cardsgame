@@ -19,17 +19,19 @@ const PlayerCards = () => {
    else if (length >= 2) gap = 40;
 
    return (
-      <div
-         className={styles.root}
-         style={
-            {
-               "--gap": -gap + "px",
-            } as CSSProperties
-         }
-      >
-         {hand.map((card) => (
-            <Card draggable {...card} key={card.id} />
-         ))}
+      <div className={styles.cards_wrapper}>
+         <div
+            className={styles.root}
+            style={
+               {
+                  "--gap": -gap + "px",
+               } as CSSProperties
+            }
+         >
+            {hand.map((card) => (
+               <Card draggable {...card} key={card.id} />
+            ))}
+         </div>
       </div>
    );
 };
