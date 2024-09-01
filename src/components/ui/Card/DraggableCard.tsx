@@ -7,11 +7,13 @@ interface CardProps extends CardI {
    randomRotate?: boolean;
    draggable?: boolean;
    className?: string;
+   elementId?: string;
 }
 
 const DraggableCard = forwardRef(
    (
       {
+         elementId,
          suit,
          rank,
          randomRotate,
@@ -52,6 +54,7 @@ const DraggableCard = forwardRef(
 
       return (
          <img
+            id={elementId}
             ref={(node) => {
                setNodeRef(node);
                if (ref) {

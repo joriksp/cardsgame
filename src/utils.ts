@@ -17,6 +17,17 @@ export const varibleGap = (
    return gap;
 };
 
+/**
+ * moveCardFromDeck function
+ *
+ * Проигрывает анимацию перелета карты из колоды к указанной цели `targetRef`
+ *
+ * @param {RefObject<any> | string} targetRef - Ссылка на DOM элемент цели (или его `id`)
+ * @param {RefObject<any> | string} deckRef - Ссылка на DOM элемент колоды (или его `id`)
+ * @param {number} animationDuration - (опционально) Длительность анимации (мс)
+ *
+ * @returns {void}
+ */
 export const moveCardFromDeck = (
    targetRef: RefObject<any> | string,
    deckRef: RefObject<any> | string,
@@ -66,16 +77,10 @@ export const moveCardFromDeck = (
          width: `${cardWidth}px`,
          height: `${cardHeight}px`,
          transition: `opacity .3s ease-out`,
+         zIndex: "1000",
       },
       src: back_ic,
    });
-
-   // const cardElement = document.createElement("img");
-   // cardElement.style.position = "absolute";
-   // cardElement.style.width = `${cardWidth}px`;
-   // cardElement.style.height = `${cardHeight}px`;
-   // cardElement.style.transition = `opacity .3s ease-out`;
-   // cardElement.src = back_ic;
    document.body.appendChild(cardElement);
 
    let startTime = 0;
@@ -117,6 +122,14 @@ export const moveCardFromDeck = (
    requestAnimationFrame(animate);
 };
 
+/**
+ * clearTableAnimated function
+ *
+ * Смахивает DOM элементы карт со стола, а затем вызывает `callback` функцию.
+ *
+ * @param {React.MutableRefObject} cardRefs - Ссылки на DOM элементы карт, лежащих на столе
+ * @param callback - Callback функция, вызываемая после анимации
+ */
 export const clearTableAnimated = (
    cardRefs: React.MutableRefObject<{
       [id: string]: HTMLElement;
@@ -136,6 +149,38 @@ export const clearTableAnimated = (
    });
    cardRefs.current = {};
 };
+
+// export const moveFromTable = (
+//    cardRefs: React.MutableRefObject<{
+//       [id: string]: HTMLElement;
+//    }>,
+//    callback?: () => void
+// ) => {
+//    Object.values(cardRefs.current).forEach((element) => {
+//       const animate = useAnimateElement();
+//       animate(element, {
+//          from: {
+//             x: 0,
+//             y: 0,
+//             width: 100,
+//             height: 100,
+//          },
+//          to: {
+//             x: 200,
+//             y: 200,
+//             width: 200,
+//             height: 200,
+//          },
+//          animationOptions: {
+//             animationDuration: 1000,
+//             onFinish: () => {
+//                if (callback) callback();
+//             },
+//          },
+//       });
+//    });
+//    cardRefs.current = {};
+// };
 
 export const element = (
    type: string,

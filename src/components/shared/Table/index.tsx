@@ -4,6 +4,7 @@ import { Slot as SlotI, useGame } from "src/contexts/GameContext";
 import { useDroppable } from "@dnd-kit/core";
 import { forwardRef, useRef } from "react";
 import { clearTableAnimated } from "src/utils";
+import useAnimateElement from "src/hooks/useAnimateElement";
 
 interface SlotProps {
    slot: SlotI;
@@ -48,14 +49,34 @@ const Slot = forwardRef<HTMLDivElement, SlotProps>(
 );
 
 const Table = () => {
-   const { slots, clearTable } = useGame();
+   const { slots, clearTable, addCardToHand } = useGame();
    const { isOver, setNodeRef } = useDroppable({ id: "table" });
    const cardRefs = useRef<{
       [id: string]: HTMLElement;
    }>({});
+   const animate = useAnimateElement();
 
    const handleClearTable = () => {
-      clearTableAnimated(cardRefs, clearTable);
+      // clearTableAnimated(cardRefs, clearTable);
+      slots.forEach((slot) => {
+         slot.cards.forEach((card) => {
+            addCardToHand(card);
+         });
+      });
+
+      Object.values(cardRefs.current).forEach((element) => {
+         animate(element, {
+            fromElement: element,
+            toElement: "playercards",
+            animationOptions: {
+               animationDuration: 400,
+               onFinish: () => {
+                  clearTable();
+               },
+            },
+         });
+      });
+      cardRefs.current = {};
    };
 
    return (

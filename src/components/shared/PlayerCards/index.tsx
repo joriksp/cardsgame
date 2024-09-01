@@ -35,6 +35,7 @@ const PlayerCards = ({ isDraggingEnabled = true }: PlayerCardsProps) => {
          >
             {hand.map((card) => (
                <DraggableCard
+                  elementId={`playercard-${card.id}`}
                   draggable={isDraggingEnabled}
                   {...card}
                   key={card.id}
