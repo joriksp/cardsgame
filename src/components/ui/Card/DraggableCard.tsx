@@ -25,7 +25,6 @@ const DraggableCard = forwardRef(
    ) => {
       const [rotate, setRotate] = useState(0);
       const [src, setSrc] = useState("");
-
       if (!id) id = Math.floor(Math.random() * 360);
 
       useEffect(() => {
