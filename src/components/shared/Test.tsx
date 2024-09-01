@@ -1,4 +1,4 @@
-import animationService from "src/contexts/AnimationContext";
+import animationService from "src/contexts/animationService";
 import { useGame } from "src/contexts/GameContext";
 import useAnimateElement, {
    animateElements,

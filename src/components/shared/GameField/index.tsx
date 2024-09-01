@@ -16,6 +16,7 @@ const GameField = () => {
 
          <Table />
          <Deck
+            isVisible={true}
             trumpCard={{
                suit: Suits.Club,
                rank: Ranks.Eight,

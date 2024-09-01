@@ -2,21 +2,20 @@ import Card from "src/components/ui/Card";
 import styles from "./table.module.scss";
 import { Slot as SlotI, useGame } from "src/contexts/GameContext";
 import { useDroppable } from "@dnd-kit/core";
-import { forwardRef } from "react";
 
 import Test from "../Test";
-import animationService from "src/contexts/AnimationContext";
+import animationService from "src/contexts/animationService";
 
 interface SlotProps {
    slot: SlotI;
 }
 
-const Slot = forwardRef<HTMLDivElement, SlotProps>(({ slot }, ref) => {
+const Slot = ({ slot }: SlotProps) => {
    const { isOver, setNodeRef } = useDroppable({
       id: `slot-${slot.id}`,
       disabled: !slot.cards.length,
    });
-   const isDropping = isOver && !!slot.cards.length;
+   const isDropping = isOver && slot.cards.length;
 
    return (
       <div
@@ -24,8 +23,6 @@ const Slot = forwardRef<HTMLDivElement, SlotProps>(({ slot }, ref) => {
          key={slot.id}
          ref={(node) => {
             setNodeRef(node);
-            if (typeof ref === "function") ref(node);
-            else if (ref) ref.current = node;
          }}
       >
          {slot.cards.map((card) => (
@@ -33,8 +30,8 @@ const Slot = forwardRef<HTMLDivElement, SlotProps>(({ slot }, ref) => {
                key={card.id}
                {...card}
                ref={(node: HTMLDivElement | null) => {
-                  if (node) {
-                     animationService.tableCardsRef.current[card.id!] = node;
+                  if (node && card.id) {
+                     animationService.tableCardsRef.current[card.id] = node;
                   }
                }}
                randomRotate
@@ -42,7 +39,7 @@ const Slot = forwardRef<HTMLDivElement, SlotProps>(({ slot }, ref) => {
          ))}
       </div>
    );
-});
+};
 
 const Table = () => {
    const { slots } = useGame();
@@ -55,7 +52,7 @@ const Table = () => {
       >
          <Test />
          {slots.map((slot) => (
-            <Slot key={slot.id} slot={slot} ref={null} />
+            <Slot key={slot.id} slot={slot} />
          ))}
       </div>
    );
