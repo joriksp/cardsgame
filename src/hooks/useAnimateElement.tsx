@@ -1,13 +1,13 @@
 import { useRef } from "react";
 
-interface AnimationOptions {
+export interface AnimationOptions {
    animationDuration: number;
    onStart?: () => void;
    onFinish?: () => void;
 }
 
-interface AnimateElementOptions {
-   fromElement: HTMLElement | string;
+export interface AnimateElementOptions {
+   fromElement?: HTMLElement | string;
    toElement: HTMLElement | string;
    animationOptions: AnimationOptions;
 }
@@ -43,7 +43,9 @@ const useAnimateElement = () => {
       const { fromElement, toElement, animationOptions } = options;
       const { animationDuration, onStart, onFinish } = animationOptions;
 
-      const from = getElementPosition(getDOMElement(fromElement));
+      const from = getElementPosition(
+         getDOMElement(fromElement ? fromElement : element)
+      );
       const to = getElementPosition(getDOMElement(toElement));
 
       let startTime = 0;
@@ -98,3 +100,27 @@ const useAnimateElement = () => {
 };
 
 export default useAnimateElement;
+
+export const animateElements = (
+   elements: {
+      [id: string]: HTMLElement;
+   },
+   animationOptions: AnimateElementOptions,
+   animateFunc: (element: HTMLElement, options: AnimateElementOptions) => void
+) => {
+   const animationPromises = Object.values(elements).map((element) => {
+      return new Promise<void>((resolve) => {
+         animateFunc(element, {
+            ...animationOptions,
+            animationOptions: {
+               ...animationOptions.animationOptions,
+               onFinish: () => {
+                  resolve();
+               },
+            },
+         });
+      });
+   });
+
+   return Promise.all(animationPromises);
+};
