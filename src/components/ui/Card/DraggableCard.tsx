@@ -2,7 +2,6 @@ import { forwardRef, memo, useEffect, useState } from "react";
 import { CardI } from "src/types";
 import styles from "./card.module.scss";
 import { useDraggable } from "@dnd-kit/core";
-import Card from ".";
 
 interface CardProps extends CardI {
    randomRotate?: boolean;
