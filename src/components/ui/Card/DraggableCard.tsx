@@ -2,6 +2,7 @@ import { forwardRef, memo, useEffect, useState } from "react";
 import { CardI } from "src/types";
 import styles from "./card.module.scss";
 import { useDraggable } from "@dnd-kit/core";
+import Card from ".";
 
 interface CardProps extends CardI {
    randomRotate?: boolean;
@@ -25,14 +26,22 @@ const DraggableCard = forwardRef(
    ) => {
       const [rotate, setRotate] = useState(0);
       const [src, setSrc] = useState("");
+      const [isLoading, setIsLoading] = useState(true);
+
       if (!id) id = Math.floor(Math.random() * 360);
 
       useEffect(() => {
          const loadCardImage = async () => {
-            const object = await import(
-               `../../../../src/assets/cards/${suit}/${rank}.svg`
-            );
-            setSrc(object.default);
+            try {
+               const object = await import(
+                  `../../../../src/assets/cards/${suit}/${rank}.svg`
+               );
+               setSrc(object.default);
+            } catch (error) {
+               console.error(error);
+            } finally {
+               setIsLoading(false);
+            }
          };
          loadCardImage();
       }, [rank, suit]);
@@ -64,7 +73,7 @@ const DraggableCard = forwardRef(
             {...attributes}
             className={`${styles.card} ${isDragging && styles.dragging} ${
                draggable && styles.draggable
-            } ${className}`}
+            } ${className} ${isLoading ? styles.loader : ""}`}
             style={{
                transform: transform
                   ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
