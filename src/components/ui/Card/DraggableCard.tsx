@@ -25,6 +25,7 @@ const DraggableCard = forwardRef(
    ) => {
       const [rotate, setRotate] = useState(0);
       const [src, setSrc] = useState("");
+      const [isLoading, setIsLoading] = useState(true);
 
       if (!id) id = Math.floor(Math.random() * 360);
 
@@ -57,27 +58,33 @@ const DraggableCard = forwardRef(
       }, [randomRotate]);
 
       return (
-         <img
-            id={elementId}
-            ref={(node) => {
-               setNodeRef(node);
-               if (ref) {
-                  typeof ref === "function" ? ref(node) : (ref.current = node);
-               }
-            }}
-            {...listeners}
-            {...attributes}
+         <div
             className={`${styles.card} ${isDragging && styles.dragging} ${
                draggable && styles.draggable
-            } ${className}`}
+            } ${className} ${isLoading && styles.loading}`}
+            {...listeners}
+            {...attributes}
             style={{
                transform: transform
                   ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
                   : undefined,
                rotate: `${rotate}deg`,
             }}
-            src={src}
-         />
+         >
+            <img
+               onLoad={() => setIsLoading(false)}
+               id={elementId}
+               ref={(node) => {
+                  setNodeRef(node);
+                  if (ref) {
+                     typeof ref === "function"
+                        ? ref(node)
+                        : (ref.current = node);
+                  }
+               }}
+               src={src}
+            />
+         </div>
       );
    }
 );
