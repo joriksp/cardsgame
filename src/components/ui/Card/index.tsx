@@ -11,6 +11,7 @@ const Card = forwardRef(
    ({ suit, rank, randomRotate, className = "" }: CardProps, ref) => {
       const [rotate, setRotate] = useState(0);
       const [src, setSrc] = useState("");
+      const [isLoading, setIsLoading] = useState(true);
 
       const loadCardImage = async () => {
          try {
@@ -35,23 +36,25 @@ const Card = forwardRef(
       }, [randomRotate]);
 
       return (
-         <>
+         <div
+            ref={(node) => {
+               if (ref) {
+                  typeof ref === "function" ? ref(node) : (ref.current = node);
+               }
+            }}
+            style={{
+               rotate: `${rotate}deg`,
+            }}
+            className={`${styles.card} ${className} ${
+               isLoading && styles.loading
+            }`}
+         >
             <img
-               ref={(node) => {
-                  if (ref) {
-                     typeof ref === "function"
-                        ? ref(node)
-                        : (ref.current = node);
-                  }
-               }}
-               style={{
-                  rotate: `${rotate}deg`,
-               }}
-               className={`${styles.card} ${className}`}
+               onLoad={() => setIsLoading(false)}
                src={src}
-               alt={`${rank} of ${suit}`} // не забудьте добавить alt для доступности
+               alt={`${rank} of ${suit}`}
             />
-         </>
+         </div>
       );
    }
 );

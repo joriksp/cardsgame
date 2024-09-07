@@ -73,6 +73,7 @@ const Test = () => {
                addCardToHand({
                   suit: Object.values(Suits)[Math.floor(Math.random() * 4)],
                   rank: Object.values(Ranks)[Math.floor(Math.random() * 13)],
+                  id: Math.floor(Math.random() * 1000),
                });
             }}
          >

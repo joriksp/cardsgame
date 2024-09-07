@@ -59,6 +59,13 @@ const DraggableCard = forwardRef(
 
       return (
          <div
+            id={elementId}
+            ref={(node) => {
+               setNodeRef(node);
+               if (ref) {
+                  typeof ref === "function" ? ref(node) : (ref.current = node);
+               }
+            }}
             className={`${styles.card} ${isDragging && styles.dragging} ${
                draggable && styles.draggable
             } ${className} ${isLoading && styles.loading}`}
@@ -71,19 +78,7 @@ const DraggableCard = forwardRef(
                rotate: `${rotate}deg`,
             }}
          >
-            <img
-               onLoad={() => setIsLoading(false)}
-               id={elementId}
-               ref={(node) => {
-                  setNodeRef(node);
-                  if (ref) {
-                     typeof ref === "function"
-                        ? ref(node)
-                        : (ref.current = node);
-                  }
-               }}
-               src={src}
-            />
+            <img onLoad={() => setIsLoading(false)} src={src} />
          </div>
       );
    }
