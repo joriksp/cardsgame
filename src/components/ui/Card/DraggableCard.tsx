@@ -25,7 +25,6 @@ const DraggableCard = forwardRef(
    ) => {
       const [rotate, setRotate] = useState(0);
       const [src, setSrc] = useState("");
-      const [isLoading, setIsLoading] = useState(true);
 
       if (!id) id = Math.floor(Math.random() * 360);
 
@@ -38,8 +37,6 @@ const DraggableCard = forwardRef(
                setSrc(object.default);
             } catch (error) {
                console.error(error);
-            } finally {
-               setIsLoading(false);
             }
          };
          loadCardImage();
@@ -72,7 +69,7 @@ const DraggableCard = forwardRef(
             {...attributes}
             className={`${styles.card} ${isDragging && styles.dragging} ${
                draggable && styles.draggable
-            } ${className} ${isLoading && styles.loader}`}
+            } ${className}`}
             style={{
                transform: transform
                   ? `translate3d(${transform.x}px, ${transform.y}px, 0)`

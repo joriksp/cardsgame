@@ -3,6 +3,7 @@ import { useGame } from "src/contexts/GameContext";
 import useAnimateElement, {
    animateElements,
 } from "src/hooks/useAnimateElement";
+import { Ranks, Suits } from "src/types";
 import { clearTableAnimated, moveCardFromDeck } from "src/utils";
 
 const Test = () => {
@@ -66,6 +67,16 @@ const Test = () => {
             }}
          >
             Анимация карты из колоды
+         </button>
+         <button
+            onClick={() => {
+               addCardToHand({
+                  suit: Object.values(Suits)[Math.floor(Math.random() * 4)],
+                  rank: Object.values(Ranks)[Math.floor(Math.random() * 13)],
+               });
+            }}
+         >
+            Карта в руку
          </button>
       </div>
    );
