@@ -72,7 +72,7 @@ const DraggableCard = forwardRef(
             {...attributes}
             className={`${styles.card} ${isDragging && styles.dragging} ${
                draggable && styles.draggable
-            } ${className} ${isLoading ? styles.loader : ""}`}
+            } ${className} ${isLoading && styles.loader}`}
             style={{
                transform: transform
                   ? `translate3d(${transform.x}px, ${transform.y}px, 0)`

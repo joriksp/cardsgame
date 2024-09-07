@@ -51,9 +51,10 @@ const Card = forwardRef(
                   rotate: `${rotate}deg`,
                }}
                className={`${styles.card} ${className} ${
-                  isLoading ? styles.loader : ""
+                  isLoading && styles.loader
                }`}
                src={src}
+               alt={`${rank} of ${suit}`} // не забудьте добавить alt для доступности
             />
          </>
       );

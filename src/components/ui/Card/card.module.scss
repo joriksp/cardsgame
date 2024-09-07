@@ -19,6 +19,8 @@
    }
 
    &.loader {
+      aspect-ratio: calc(141.75 / 201.09);
+
       &::before {
          content: "";
          position: absolute;
